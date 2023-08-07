@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Oswald:wght@200&family=Roboto:wght@300&display=swap');
+            *{
+                margin:0;
+                top:0;
+            }
+            header{
+                background-image: url('../static/bg.jpg');
+                background-color: #000b52af;
+                background-repeat: no-repeat;
+                background-size: 100% 50vh;
+                height:50vh;
+                text-align: center;
+                background-blend-mode:darken;
+                background-attachment: fixed;
+            }
+            header h1{
+                position:absolute;
+                top:0%;
+                padding-top:0;
+                color:#ffffff;
+                text-shadow: 10px #000000;
+                font-size: 4vw;
+                width:100%;
+                height: 50vh;
+                text-transform: uppercase;
+                text-align: center;
+                background-image: linear-gradient(180deg,transparent,#00000021,transparent);
+                backdrop-filter: blur(2px);
+                font-family: 'Noto sans',sans-serif;
+            }
+            header .inner-text{
+               position: relative;
+               top:40%;
+            }
+            .events{
+                display:flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .events h1{
+                margin-top:3cm;
+                color:#082444;
+                font-size:4vw;
+                font-family: 'Roboto',sans-serif;
+            }
+            .events .event-cont{
+                margin-top:3cm;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width:100%;
+            }
+            .events .event-cont .event{
+                position:relative;
+                top:0px;
+                border:0px solid transparent;
+                border-radius: 10px;
+                box-shadow: 0 20px 100px #000000;
+                transition-duration: 0.5s;
+                width:35vw;
+                padding-left:30px;
+                padding-right:30px;
+            }
+            .events .event-cont .event h1{
+                position:relative;
+                top:-70px;
+                font-size:3vw;
+                color:#4d1770;
+            }
+            .events .event-cont .event h2{
+                position:relative;
+                top:-60px;
+                color:#082444;
+                font-family:'noto sans',sans-serif;
+            }
+            .events .event-cont .event p{
+                position:relative;
+                top:-40px;
+                color:#46454b;
+                font-family: 'oswald',sans-serif;
+            }
+            .events .event-cont .event:hover{
+                transition-duration: 0.5s;
+                top:-20px;
+                box-shadow: 0 40px 100px #000000;
+            }
+            form{
+                position:relative;
+                top:3cm;
+                left:25vw;
+                font-family:'noto sans',sans-serif;
+                text-align: center;
+                width:50%;
+                color:#082444;
+            }
+
+            form .fld{
+                display:flex;
+                flex-direction: column;
+                line-height:5vh;
+                margin-bottom:10px;
+            }
+            form input{
+                outline:0;
+                text-align: center;
+                border:1px solid #000000;
+                height:6vh;
+                border-radius:6vh;
+                font-family:'noto sans',sans-serif;
+            }
+            form input::placeholder{
+                font-family:'noto sans',sans-serif;
+            }
+            form select{
+                text-align: center;
+                height:6vh;
+                border-radius: 6vh;
+                border:1px solid #000000;
+                outline:0px;
+            }
+            form [type*='submit']{
+                width:100%;
+                margin-top: 1cm;
+                background-color: #37009e;
+                border:0px solid transparent;
+                outline:0;
+                color:#ffffff;
+                transition-duration: 0.5s;
+            }
+            form [type*='submit']:hover{
+                background-color: #1a79e6;
+                box-shadow: 0 0 20px #1a79e6;
+                transition-duration: 0.5s;
+            }
+            footer{
+                position: relative;
+                top:6cm;
+                text-align: center;
+                font-family: 'roboto',sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1><div class="inner-text">National Institute of Technology- Model United Nations</div></h1>
+        </header>
+        <main>
+            <div class="events">
+                <h1>
+                    Upcoming events
+                </h1>
+                <div class="event-cont">
+                    {%for event in events%}
+                    <div class="event">
+                        <h1>{{event.name}}</h1>
+                        <h2>{{event.date}}</h2>
+                        <h2>{{event.time}}</h2>
+                        <p>{{event.desc}}</p>
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <form action="/applied" method="post">
+                <h1>Register here</h1>
+                <div class="fld">
+                    <label>Enter your full name:</label>
+                    <input type='text' name='name' placeholder="Your Name">
+                </div>
+                <div class="fld">
+                    <label>Enter your institute name:</label>
+                    <input type='text' name='institute' placeholder="Your Institute">
+                </div>
+                <div class="fld">
+                    <label>Enter your phone number:</label>
+                    <input type='text' name='phone' placeholder="Your Phone Number">
+                </div>
+                <div class="fld">
+                    <label>Enter your email ID:</label>
+                    <input type='email' name='email' placeholder="Your Email ID">
+                </div>
+                <div class="fld">
+                    <label>Applying for?</label>
+                    <select name="applied">
+                        {%for event in events%}
+                        <option>{{event.name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <input type="submit" value="SUBMIT">
+            </form>
+        </main>
+        <footer>
+            &copy; Copyright @Barnil Sarma
+        </footer>
+    </body>
+</html>
